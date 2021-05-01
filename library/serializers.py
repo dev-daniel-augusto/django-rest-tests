@@ -29,7 +29,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         )
 
 
-class Ratingerializer(serializers.ModelSerializer):
+class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         extra_kwargs = {
             'email': {'write_only': True}
