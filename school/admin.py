@@ -9,7 +9,10 @@ class ParentAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['student_name', 'created', 'modified', 'is_live']
+    list_display = ['student_name', 'created', 'modified', 'is_live', 'get_parent_name']
+
+    def get_parent_name(self, obj):
+        return ', '.join([parent.parent_name for parent in obj.parent_name.all()])
 
 
 @admin.register(Phone)
