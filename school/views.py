@@ -40,3 +40,33 @@ class StudentViewSet(viewsets.ModelViewSet):
         student = self.get_object()
         serializer = ParentSerializer(student.parent_name.all(), many=True)
         return Response(serializer.data)
+
+
+class ParentsAPIView(generics.ListCreateAPIView):
+    queryset = Parent.objects.all()
+    serializer_class = ParentSerializer
+
+
+class ParentAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Parent.objects.all()
+    serializer_class = ParentSerializer
+
+
+class PhonesAPIView(generics.ListCreateAPIView):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
+
+
+class PhoneAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
+
+
+class StudentsAPIView(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
