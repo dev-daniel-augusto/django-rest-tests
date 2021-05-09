@@ -19,10 +19,6 @@ class ParentSerializer(serializers.ModelSerializer):
             'email'
         ]
 
-    def normalize_parent_name(self, name):
-        name = name.title()
-        return name
-
 
 class PhoneSerializer(serializers.ModelSerializer):
 
