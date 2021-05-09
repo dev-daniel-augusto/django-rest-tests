@@ -12,6 +12,7 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = (
+            'id',
             'title',
             'pages',
             'condition',
@@ -23,7 +24,7 @@ class BookSerializer(serializers.ModelSerializer):
         if value > 0:
             return value
         raise serializers.ValidationError(
-            f" You've sent the value {value} to the price field. The price must be higher than 0 ")
+            f" You've sent the value {value} to the price field. The price must be higher than 0")
 
     def validate_title(self, string):
         if string[0] == string.capitalize()[0]:
@@ -39,13 +40,14 @@ class BookSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 f"You've sent the value {value} to the pages field. The pages number must be higher than 0")
         raise serializers.ValidationError(
-            f"You've sent the value {value} to the pages field. The max length allowed is 50560 pages ")
+            f"You've sent the value {value} to the pages field. The max length allowed is 50560 pages")
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = (
+            'id',
             'title',
             'author',
         )
@@ -58,8 +60,9 @@ class RatingSerializer(serializers.ModelSerializer):
         }
         model = Rating
         fields = (
-            'name',
+            'id'
             'title',
+            'name',
             'email',
             'comment',
             'stars',

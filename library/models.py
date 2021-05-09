@@ -18,7 +18,7 @@ class Book(models.Model):
         ('New', 'Brand new'),
         ('Used', 'Old'),
     )
-    title = models.CharField('Title', max_length=300)
+    title = models.CharField('Title', max_length=300, unique=True)
     pages = models.IntegerField('Number of Pages')
     condition = models.CharField('Condition', max_length=4, choices=CONDITION_CHOICES)
     price = models.DecimalField('Price', max_digits=8, decimal_places=2)
@@ -53,8 +53,8 @@ class Rating(models.Model):
         BAD = 2
         HORRIBLE = 1
 
+    title = models.ForeignKey(Book, related_name='ratings', on_delete=models.CASCADE)
     name = models.CharField('Name', max_length=300)
-    title = models.ForeignKey(Book, on_delete=models.CASCADE)
     email = models.EmailField('Email', max_length=200)
     comment = models.TextField('Comment', blank=True)
     stars = models.IntegerField('Stars', choices=Star.choices)
