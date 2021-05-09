@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from re import search
 from .models import (
                     Parent,
                     Phone,
@@ -18,6 +19,22 @@ class ParentSerializer(serializers.ModelSerializer):
             'parent_name',
             'email'
         ]
+
+    def validate_email(self, email):
+        email_domains = ['gmail', 'yahoo', 'hotmail', 'aol', 'msn', 'wanadoo',
+                         'live', 'rediffmail', 'free', 'gmx']
+        if search('@', email):
+            first = email.split('@')
+            second = first[1].split('.')
+            if second[0] in email_domains:
+                return email
+            else:
+                raise serializers.ValidationError(
+                f"You've sent {second[0]} domain which is not valid domain. "
+                f"Check the following valid domains options:" 
+                f"gmail, yahoo, hotmail, aol, msn, wanadoo, live, rediffmail, free, gmx")
+        else:
+            pass
 
 
 class PhoneSerializer(serializers.ModelSerializer):
