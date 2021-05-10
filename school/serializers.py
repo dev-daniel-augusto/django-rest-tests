@@ -4,6 +4,8 @@ from .models import (
                     Parent,
                     Phone,
                     Student,
+                    Subject,
+                    Teacher,
                     )
 
 
@@ -61,4 +63,30 @@ class StudentSerializer(serializers.ModelSerializer):
             'parent_name',
             'student_name',
             'email',
+        ]
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Subject
+        fields = [
+            'id',
+            'subject',
+            'created',
+            'modified',
+            'is_live',
+        ]
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Teacher
+        fields = [
+            'id',
+            'name',
+            'created',
+            'modified',
+            'is_live',
         ]
