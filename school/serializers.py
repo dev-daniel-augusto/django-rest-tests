@@ -26,15 +26,15 @@ class ParentSerializer(serializers.ModelSerializer):
         email_domains = ['gmail', 'yahoo', 'hotmail', 'aol', 'msn', 'wanadoo',
                          'live', 'rediffmail', 'free', 'gmx']
         if search('@', email):
-            first = email.split('@')
-            second = first[1].split('.')
-            if second[0] in email_domains:
+            email_split = email.split('@')
+            domain = email_split[1].split('.')[0]
+            if domain in email_domains:
                 return email
             else:
                 raise serializers.ValidationError(
-                f"You've sent {second[0]} domain which is not valid domain. "
-                f"Check the following valid domains options:" 
-                f"gmail, yahoo, hotmail, aol, msn, wanadoo, live, rediffmail, free, gmx")
+                    f"You've sent an e-mail with {domain} domain which is not valid domain. "
+                    f"Check the following valid domains options: " 
+                    f"gmail, yahoo, hotmail, aol, msn, wanadoo, live, rediffmail, free, gmx")
         else:
             pass
 
