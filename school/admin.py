@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Parent, Student, Phone
+from .models import (
+                    Parent,
+                    Student,
+                    Phone,
+                    Subject,
+                    Teacher,
+                    )
 
 
 @admin.register(Parent)
@@ -18,3 +24,13 @@ class StudentAdmin(admin.ModelAdmin):
 @admin.register(Phone)
 class TelephoneAdmin(admin.ModelAdmin):
     list_display = ['mobile_phone', 'landline_phone', 'created', 'modified', 'is_live']
+
+
+@admin.register(Subject)
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ['subject', 'created', 'modified', 'is_live']
+
+
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ['name', 'subject', 'created', 'modified', 'is_live']
