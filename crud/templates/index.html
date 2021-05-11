@@ -1,0 +1,30 @@
+{% extends 'core.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Parents</h1>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Parent</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for parent in parents%}
+                <tr>
+                    <th scope="row">{{ parent.id }}</th>
+                    <td>{{ parent.parent_name }}</td>
+                    <td>{{ parent.email }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="{% url 'update_parent' parent.id %}">Update</a>
+                        <a class="btn btn-outline-danger" href="{% url 'delete_parent' parent.id %}">Delete</a>
+                        <a class="btn btn-outline-info" href="{% url 'parents' %}">API</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

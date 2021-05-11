@@ -1,0 +1,17 @@
+{% extends 'core.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1>Delete</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% buttons %}
+        <p><strong class="warning">Warning</strong>: you're going to delete this entry from your database.
+            If you're sure about it, confirm below:</p>
+        <button type="submit" class="btn btn-outline-danger">Confirm</button>
+        <button type="button" class="btn btn-outline-primary">
+            <a href="{% url 'index' %}">Home Page</a>
+        </button>
+        {% endbuttons %}
+
+    </form>
+{% endblock %}
