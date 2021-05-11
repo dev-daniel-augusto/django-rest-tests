@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'library',
+    'school',
+    'crud',
 
-    'django-filters'
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,7 @@ ROOT_URLCONF = 'rest_framework_tests.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['temapltes'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
