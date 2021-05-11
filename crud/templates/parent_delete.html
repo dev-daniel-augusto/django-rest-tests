@@ -5,7 +5,7 @@
     <form method="post">
         {% csrf_token %}
         {% buttons %}
-        <p><strong class="warning">Warning</strong>: you're going to delete this entry from your database.
+        <p><strong class="warning">Warning</strong>: you're going to delete <strong>{{ object }}</strong> entry from your database.
             If you're sure about it, confirm below:</p>
         <button type="submit" class="btn btn-outline-danger">Confirm</button>
         <button type="button" class="btn btn-outline-primary">
