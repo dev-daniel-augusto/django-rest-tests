@@ -22,4 +22,5 @@ urlpatterns = [
     path('api/v1/library/', include('library.urls')),
     path('api/v1/school/', include(router.urls)),
     path('api/v2/school/', include('school.urls')),
+    path('', include('crud.urls')),
 ]
