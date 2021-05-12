@@ -5,9 +5,9 @@
         {% csrf_token %}
         {% bootstrap_form form %}
             {% buttons %}
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-warning">
-                    <a href="{% url 'index' %}">Home Page</a>
+                <button type="submit" class="btn btn-outline-primary">Save</button>
+                <button type="button" class="btn btn-outline-warning">
+                    <a href="{% url 'parents' %}">Home Page</a>
                 </button>
             {% endbuttons %}
     </form>
