@@ -3,3 +3,5 @@ venv/
 migrations/
 __pycache__/
 requirements.txt
+school/apps.py
+school/permissions.py
