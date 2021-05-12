@@ -11,10 +11,11 @@ from school.models import (
                     )
 
 
-class IndexView(LoginRequiredMixin, ListView):
+class ParentView(LoginRequiredMixin, ListView):
     models = Parent
-    template_name = 'index.html'
+    template_name = 'parents.html'
     queryset = Parent.objects.order_by('id').all()
+    paginate_by = 7
     context_object_name = 'parents'
 
 
@@ -25,6 +26,7 @@ class CreateParentView(LoginRequiredMixin, CreateView):
         'parent_name',
         'email',
     ]
+    success_url = reverse_lazy('parents')
 
 
 class UpdateParentView(LoginRequiredMixin, UpdateView):
@@ -34,10 +36,45 @@ class UpdateParentView(LoginRequiredMixin, UpdateView):
         'parent_name',
         'email'
     ]
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('parents')
 
 
 class DeleteParentView(LoginRequiredMixin, DeleteView):
     model = Parent
     template_name = 'parent_delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('parents')
+
+
+class PhoneView(LoginRequiredMixin, ListView):
+    models = Phone
+    template_name = 'phones.html'
+    queryset = Phone.objects.all()
+    context_object_name = 'phones'
+
+
+class CreatePhoneView(LoginRequiredMixin, CreateView):
+    model = Phone
+    template_name = 'phone_form.html'
+    fields = [
+        'parent_name',
+        'mobile_phone',
+        'landline_phone',
+    ]
+    success_url = reverse_lazy('phones')
+
+
+class UpdatePhoneView(LoginRequiredMixin, UpdateView):
+    model = Phone
+    template_name = 'phone_update.html'
+    fields = [
+        'parent_name',
+        'mobile_phone',
+        'landline_phone',
+    ]
+    success_url = reverse_lazy('phones')
+
+
+class DeletePhoneView(LoginRequiredMixin, DeleteView):
+    model = Phone
+    template_name = 'phone_delete.html'
+    success_url = reverse_lazy('phones')
