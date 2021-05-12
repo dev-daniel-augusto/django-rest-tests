@@ -1,0 +1,13 @@
+{% extends 'core.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1>Parent Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-outline-primary">Create</button>
+            <button type="button" class="btn btn-outline-danger"><a href="{% url 'phones' %}">Phone Page</a></button>
+            {% endbuttons %}
+    </form>
+{% endblock %}

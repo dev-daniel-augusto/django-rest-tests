@@ -1,0 +1,31 @@
+{% extends 'core.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1>Phones</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Parent</th>
+                <th scope="col">Mobile Phoner</th>
+                <th scope="col">Landline Phone</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for phone in phones %}
+            <tr>
+                <th scope="row">{{ phone.id }}</th>
+                <td>{{ phone.parent_name }}</td>
+                <td>{{ phone.mobile_phone }}</td>
+                <td>{{ phone.landline_phone}}</td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{% url 'update_phone' phone.id %}">Update</a>
+                    <a class="btn btn-outline-danger" href="{% url 'delete_phone' phone.id %}">Delete</a>
+                    <a class="btn btn-outline-info" href="{% url 'phones_api' %}">API</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
