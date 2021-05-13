@@ -78,3 +78,38 @@ class DeletePhoneView(LoginRequiredMixin, DeleteView):
     model = Phone
     template_name = 'phone_delete.html'
     success_url = reverse_lazy('phones')
+
+
+class StudentView(LoginRequiredMixin, ListView):
+    models = Student
+    template_name = 'students.html'
+    queryset = Student.objects.all()
+    context_object_name = 'students'
+
+
+class CreateStudentView(LoginRequiredMixin, CreateView):
+    model = Student
+    template_name = 'student_form.html'
+    fields = [
+        'parent_name',
+        'student_name',
+        'email'
+    ]
+    success_url = reverse_lazy('students')
+
+
+class UpdateStudentView(LoginRequiredMixin, UpdateView):
+    model = Student
+    template_name = 'student_update.html'
+    fields = [
+        'parent_name',
+        'student_name',
+        'email'
+    ]
+    success_url = reverse_lazy('students')
+
+
+class DeleteStudentView(LoginRequiredMixin, DeleteView):
+    model = Student
+    template_name = 'student_delete.html'
+    success_url = reverse_lazy('students')
