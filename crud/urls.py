@@ -8,6 +8,10 @@ from .views import (
                     CreatePhoneView,
                     UpdatePhoneView,
                     DeletePhoneView,
+                    StudentView,
+                    CreateStudentView,
+                    UpdateStudentView,
+                    DeleteStudentView,
                     )
 
 urlpatterns = [
@@ -19,4 +23,9 @@ urlpatterns = [
     path('phones/add/', CreatePhoneView.as_view(), name='create_phone'),
     path('phones/update/<int:pk>/', UpdatePhoneView.as_view(), name='update_phone'),
     path('phones/update/int:<pk>/', DeletePhoneView.as_view(), name='delete_phone'),
+    path('students/', StudentView.as_view(), name='students'),
+    path('students/add/', CreateStudentView.as_view(), name='create_student'),
+    path('students/update/<int:pk>/', UpdateStudentView.as_view(), name='update_student'),
+    path('students/delete/<int:pk>/', DeleteStudentView.as_view(), name='delete_student'),
 ]
+
