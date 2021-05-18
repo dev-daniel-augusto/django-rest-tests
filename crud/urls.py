@@ -12,6 +12,10 @@ from .views import (
                     CreateStudentView,
                     UpdateStudentView,
                     DeleteStudentView,
+                    SubjectListView,
+                    CreateSubjectView,
+                    UpdateSubjectView,
+                    DeleteSubjectView,
                     )
 
 urlpatterns = [
@@ -27,5 +31,8 @@ urlpatterns = [
     path('students/add/', CreateStudentView.as_view(), name='create_student'),
     path('students/update/<int:pk>/', UpdateStudentView.as_view(), name='update_student'),
     path('students/delete/<int:pk>/', DeleteStudentView.as_view(), name='delete_student'),
+    path('subjects/', SubjectListView.as_view(), name='subjects'),
+    path('subjects/add/', CreateSubjectView.as_view(), name='create_subject'),
+    path('subjects/update/<int:pk>/', UpdateSubjectView.as_view(), name='update_subject'),
+    path('subjects/delete/<int:pk>/', DeleteSubjectView.as_view(), name='delete_subject'),
 ]
-
