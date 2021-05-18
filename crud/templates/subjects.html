@@ -1,0 +1,26 @@
+{% extends 'core.html' %}
+{% block content %}
+    <h1>Subjects</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <th width="10%" scope="row">{{ subject.id }}</th>
+                <td width="60%">{{ subject.subject }}</td>
+                <td width="30%">
+                    <a class="btn btn-outline-primary" href="{% url 'update_subject' subject.id %}">Update</a>
+                    <a class="btn btn-outline-danger" href="{% url 'delete_subject' subject.id %}">Delete</a>
+                    <a class="btn btn-outline-info" href="{% url 'subjects_api' %}">API</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

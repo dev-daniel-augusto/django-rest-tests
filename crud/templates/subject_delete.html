@@ -1,0 +1,15 @@
+{% extends 'core.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+                <p><strong class="warning">Warning</strong>: you're going to delete <strong>{{ object }}</strong>
+            entry from your database. If you're sure about it, confirm below:</p>
+        {% buttons %}
+            <button class="btn btn-outline-danger">Delete</button>
+            <button class="btn btn-outline-info">
+                <a href="{% url 'subjects' %}">Subjects Page</a>
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
