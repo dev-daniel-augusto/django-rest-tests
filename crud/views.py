@@ -113,3 +113,34 @@ class DeleteStudentView(LoginRequiredMixin, DeleteView):
     model = Student
     template_name = 'student_delete.html'
     success_url = reverse_lazy('students')
+
+
+class SubjectListView(LoginRequiredMixin, ListView):
+    models = Subject
+    template_name = 'subjects.html'
+    queryset = Subject.objects.all()
+    context_object_name = 'subjects'
+
+
+class CreateSubjectView(LoginRequiredMixin, CreateView):
+    model = Subject
+    template_name = 'subject_form.html'
+    fields = [
+        'subject'
+    ]
+    success_url = reverse_lazy('subjects')
+
+
+class UpdateSubjectView(LoginRequiredMixin, UpdateView):
+    model = Subject
+    template_name = 'subject_update.html'
+    fields = [
+        'subject'
+    ]
+    success_url = reverse_lazy('subjects')
+
+
+class DeleteSubjectView(LoginRequiredMixin, DeleteView):
+    model = Subject
+    template_name = 'subject_delete.html'
+    success_url = reverse_lazy('subjects')
