@@ -1,0 +1,15 @@
+{% extends 'core.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <h1>Update Teacher</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-outline-danger">Update</button>
+            <button type="button" class="btn btn-outline-warning">
+                <a href="{% url 'teachers' %}">Teacher Page</a>
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
