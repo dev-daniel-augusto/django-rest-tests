@@ -1,21 +1,10 @@
 from django.urls import path
 from .views import (
-                    ParentView,
-                    CreateParentView,
-                    UpdateParentView,
-                    DeleteParentView,
-                    PhoneView,
-                    CreatePhoneView,
-                    UpdatePhoneView,
-                    DeletePhoneView,
-                    StudentView,
-                    CreateStudentView,
-                    UpdateStudentView,
-                    DeleteStudentView,
-                    SubjectListView,
-                    CreateSubjectView,
-                    UpdateSubjectView,
-                    DeleteSubjectView,
+                    ParentView, CreateParentView, UpdateParentView, DeleteParentView,
+                    PhoneView, CreatePhoneView, UpdatePhoneView, DeletePhoneView,
+                    StudentView, CreateStudentView, UpdateStudentView, DeleteStudentView,
+                    SubjectListView, CreateSubjectView, UpdateSubjectView, DeleteSubjectView,
+                    TeacherView, CreateTeacherView, UpdateTeacherView, DeleteTeacherView,
                     )
 
 urlpatterns = [
@@ -35,4 +24,8 @@ urlpatterns = [
     path('subjects/add/', CreateSubjectView.as_view(), name='create_subject'),
     path('subjects/update/<int:pk>/', UpdateSubjectView.as_view(), name='update_subject'),
     path('subjects/delete/<int:pk>/', DeleteSubjectView.as_view(), name='delete_subject'),
+    path('teachers/', TeacherView.as_view(), name='teachers'),
+    path('teachers/add/', CreateTeacherView.as_view(), name='create_teacher'),
+    path('teachers/update/<int:pk>/', UpdateTeacherView.as_view(), name='update_teacher'),
+    path('teachers/delete/<int:pk>/', DeleteTeacherView.as_view(), name='delete_teacher'),
 ]
