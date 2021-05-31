@@ -24,7 +24,7 @@ class CreateParentView(LoginRequiredMixin, CreateView):
     template_name = 'parent_form.html'
     fields = [
         'parent_name',
-        'email',
+        'email'
     ]
     success_url = reverse_lazy('parents')
 
@@ -58,7 +58,7 @@ class CreatePhoneView(LoginRequiredMixin, CreateView):
     fields = [
         'parent_name',
         'mobile_phone',
-        'landline_phone',
+        'landline_phone'
     ]
     success_url = reverse_lazy('phones')
 
@@ -69,7 +69,7 @@ class UpdatePhoneView(LoginRequiredMixin, UpdateView):
     fields = [
         'parent_name',
         'mobile_phone',
-        'landline_phone',
+        'landline_phone'
     ]
     success_url = reverse_lazy('phones')
 
@@ -144,3 +144,36 @@ class DeleteSubjectView(LoginRequiredMixin, DeleteView):
     model = Subject
     template_name = 'subject_delete.html'
     success_url = reverse_lazy('subjects')
+
+
+class TeacherView(LoginRequiredMixin, ListView):
+    model = Teacher
+    template_name = 'teachers.html'
+    queryset = Teacher.objects.all()
+    context_object_name = 'teachers'
+
+
+class CreateTeacherView(LoginRequiredMixin, CreateView):
+    model = Teacher
+    template_name = 'teacher_form.html'
+    fields = [
+        'name',
+        'subject'
+    ]
+    success_url = reverse_lazy('teachers')
+
+
+class UpdateTeacherView(LoginRequiredMixin, UpdateView):
+    model = Teacher
+    template_name = 'teacher_update.html'
+    fields = [
+        'name',
+        'subject'
+    ]
+    success_url = reverse_lazy('teachers')
+
+
+class DeleteTeacherView(LoginRequiredMixin, DeleteView):
+    model = Teacher
+    template_name = 'teacher_delete.html'
+    success_url = reverse_lazy('teachers')
