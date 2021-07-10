@@ -1,0 +1,96 @@
+.user-icon {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+form {
+    font-family: sans-serif;
+    width: 50%;
+    margin: auto;
+}
+
+fieldset {
+    border: 1px solid rgb(137, 207, 240);
+    border-radius: 10px;
+}
+
+fieldset:hover {
+    box-shadow: 0 0 4px rgb(137, 207, 240);
+}
+
+.label-title:hover, .sex-title:hover {
+    font-size: 17px;
+    color: rgb(137, 207, 240);
+}
+
+legend {
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.label-title {
+    text-align: center;
+}
+
+.label-birthday {
+    display: block;
+    text-align: center;
+
+}
+
+.sex-title {
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+}
+
+.sex-options {
+    border: 1px solid rgb(137, 207, 240);
+    border-radius: 5px;
+    margin: auto;
+    width: 20%;
+    padding:7px;
+    box-sizing: border-box;
+}
+
+.break {
+    display: block;
+}
+
+input {
+    border: 1px solid rgb(137, 207, 240);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+input:focus {
+    border: none;
+    box-shadow: 0 0 12px rgb(137, 207, 240);
+}
+
+.input-birthday {
+    margin-top: 7px;
+
+}
+
+label {
+    margin: 10px;
+}
+
+.center {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.center2 {
+    margin-left: 19px;
+}
+
+hr {
+    margin: 20px 0 20px 0;
+    border: 1px solid rgb(137, 207, 240);
+}
