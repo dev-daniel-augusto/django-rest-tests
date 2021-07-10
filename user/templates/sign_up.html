@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Sign Up</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="author" content="Daniel Augusto">
+    <meta name="description" content="User registration page">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="#">
 </head>
 <body>
+    <div class="user-icon">
+        <img src="https://img.icons8.com/material-outlined/96/000000/user--v1.png"/>
+    </div>
+    <form id="form-sign-up" method="POST" action="#">
+        <fieldset>
+            <legend>Personal Informations</legend>
+            <label>
+                <strong>First Name</strong>
+                <input type="text" name="first_name" placeholder="Required: First Name" autofocus required>
+            </label>
 
+            <label>
+                <strong>Last Name</strong>
+                <input type="text" name="last_name" placeholder="Optional: Last Name">
+            </label>
+
+            <label class="label-birthday">
+                <span><strong>Birthday</strong></span>
+                <input type="date" name="date" placeholder="dd-mm-yyyy">
+            </label>
+
+            <div class="sex-options">
+                <label class="label-sex">
+                    <span class="sex-title">Sex</span>
+                        <span><input type="radio" name="sex" value="Male">Male</span>
+                        <span><input type="radio" name="sex" value="Female">Female</span>
+                        <span><input type="radio" name="sex" value="Non-binary">Non-binary</span>
+                </label>
+            </div>
+        </fieldset>
+        <hr>
+    </form>
 </body>
 </html>
