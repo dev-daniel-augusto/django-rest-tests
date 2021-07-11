@@ -1,47 +1,72 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
-
-
-class Category(models.Model):
-    category = models.CharField('Category', max_length=100)
-
-    class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
-
-    def __str__(self):
-        return self.category
-
-
-class Book(models.Model):
-    CONDITION_CHOICES = (
-        ('New', 'Brand new'),
-        ('Used', 'Old'),
-    )
-    title = models.CharField('Title', max_length=300, unique=True)
-    pages = models.IntegerField('Number of Pages')
-    condition = models.CharField('Condition', max_length=4, choices=CONDITION_CHOICES)
-    price = models.DecimalField('Price', max_digits=8, decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = 'Book'
-        verbose_name_plural = 'Books'
-
-    def __str__(self):
-        return self.title
 
 
 class Author(models.Model):
-    title = models.OneToOneField(Book, on_delete=models.CASCADE)
-    author = ArrayField(models.CharField('Author(s)', max_length=200), size=10)
+    author_name = models.CharField(max_length=250, unique=True)
 
     class Meta:
         verbose_name = 'Author'
         verbose_name_plural = 'Authors'
 
     def __str__(self):
-        return f'{self.author}'
+        return self.author_name
+
+
+class Language(models.Model):
+    language_name = models.CharField(max_length=200, unique=True)
+
+    class Meta:
+        verbose_name = 'Language'
+        verbose_name_plural = 'Languages'
+
+    def __str__(self):
+        return self.language_name
+
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.category_name
+
+
+class Publisher(models.Model):
+    publisher_name = models.CharField(max_length=250, unique=True)
+
+    class Meta:
+        verbose_name = 'Publisher'
+        verbose_name_plural = 'Publishers'
+
+    def __str__(self):
+        return self.publisher_name
+
+
+class Book(models.Model):
+    CONDITION_CHOICES = (
+        ('Brand New', 'Brand New'),
+        ('Old', 'Old'),
+    )
+    author = models.ManyToManyField(Author)
+    category = models.ManyToManyField(Category)
+    page_number = models.PositiveIntegerField()
+    isbn_10 = models.PositiveBigIntegerField(unique=True)
+    isbn_13 = models.PositiveBigIntegerField(unique=True)
+    book_name = models.CharField(max_length=250, unique=True)
+    book_description = models.TextField(blank=True, default='')
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    condition = models.CharField(max_length=9, choices=CONDITION_CHOICES)
+
+    class Meta:
+        verbose_name = 'Book'
+        verbose_name_plural = 'Books'
+
+    def __str__(self):
+        return self.book_name
 
 
 class Rating(models.Model):
@@ -53,11 +78,11 @@ class Rating(models.Model):
         BAD = 2
         HORRIBLE = 1
 
-    title = models.ForeignKey(Book, related_name='ratings', on_delete=models.CASCADE)
-    name = models.CharField('Name', max_length=300)
-    email = models.EmailField('Email', max_length=200)
-    comment = models.TextField('Comment', blank=True)
+    email = models.EmailField(max_length=250)
+    customer_name = models.CharField(max_length=300)
+    review = models.TextField(blank=True, default='')
     stars = models.IntegerField('Stars', choices=Star.choices)
+    title = models.ForeignKey(Book, related_name='ratings', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Rating'
