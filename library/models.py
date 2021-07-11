@@ -1,7 +1,16 @@
 from django.db import models
 
 
-class Author(models.Model):
+class Core(models.Model):
+    is_active = models.BooleanField(default=True)
+    modified = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
+class Author(Core):
     author_name = models.CharField(max_length=250, unique=True)
 
     class Meta:
@@ -12,7 +21,7 @@ class Author(models.Model):
         return self.author_name
 
 
-class Language(models.Model):
+class Language(Core):
     language_name = models.CharField(max_length=200, unique=True)
 
     class Meta:
@@ -23,7 +32,7 @@ class Language(models.Model):
         return self.language_name
 
 
-class Category(models.Model):
+class Category(Core):
     category_name = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -34,7 +43,7 @@ class Category(models.Model):
         return self.category_name
 
 
-class Publisher(models.Model):
+class Publisher(Core):
     publisher_name = models.CharField(max_length=250, unique=True)
 
     class Meta:
@@ -45,7 +54,7 @@ class Publisher(models.Model):
         return self.publisher_name
 
 
-class Book(models.Model):
+class Book(Core):
     CONDITION_CHOICES = (
         ('Brand New', 'Brand New'),
         ('Old', 'Old'),
@@ -69,7 +78,7 @@ class Book(models.Model):
         return self.book_name
 
 
-class Rating(models.Model):
+class Rating(Core):
 
     class Star(models.IntegerChoices):
         AMAZING = 5
