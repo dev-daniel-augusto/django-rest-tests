@@ -61,7 +61,7 @@ class Book(Core):
     )
     author = models.ManyToManyField(Author)
     category = models.ManyToManyField(Category)
-    page_number = models.PositiveIntegerField()
+    number_of_pages = models.PositiveIntegerField()
     isbn_10 = models.PositiveBigIntegerField(unique=True)
     isbn_13 = models.PositiveBigIntegerField(unique=True)
     book_name = models.CharField(max_length=250, unique=True)
