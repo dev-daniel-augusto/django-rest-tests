@@ -39,7 +39,6 @@ legend {
 .label-birthday {
     display: block;
     text-align: center;
-
 }
 
 .sex-title {
@@ -74,7 +73,6 @@ input:focus {
 
 .input-birthday {
     margin-top: 7px;
-
 }
 
 label {
@@ -86,7 +84,7 @@ label {
     margin: 0 auto;
 }
 
-.center2 {
+.names-left-align {
     margin-left: 19px;
 }
 
