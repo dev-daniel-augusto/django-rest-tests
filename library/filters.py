@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Author, Book
+from .models import Author, Language, Book
 
 
 class AuthorFilter(django_filters.FilterSet):
@@ -13,6 +13,18 @@ class AuthorFilter(django_filters.FilterSet):
     class Meta:
         model = Author
         fields = ('author_name',)
+
+
+class LanguageFilter(django_filters.FilterSet):
+    language_name = django_filters.CharFilter(lookup_expr='icontains', label='Language')
+    language_name__istarstwith = django_filters.CharFilter(field_name='language_name', lookup_expr='istartswith',
+                                                           label='Language (Starts with):')
+    language_name__iendswith = django_filters.CharFilter(field_name='language_name', lookup_expr='iendswith',
+                                                         label='Language (Ends with):')
+
+    class Meta:
+        model = Language
+        fields = ('language_name',)
 
 
 class BookFilter(django_filters.FilterSet):
