@@ -1,12 +1,24 @@
 import django_filters
 
-from .models import Book
+from .models import Author, Book
+
+
+class AuthorFilter(django_filters.FilterSet):
+    author_name = django_filters.CharFilter(lookup_expr='icontains', label='Author')
+    author_name__istarstwith = django_filters.CharFilter(field_name='author_name', lookup_expr='istartswith',
+                                                         label='Author (Starts with):')
+    author_name__iendswith = django_filters.CharFilter(field_name='author_name', lookup_expr='iendswith',
+                                                       label='Author (Ends with):')
+
+    class Meta:
+        model = Author
+        fields = ('author_name',)
 
 
 class BookFilter(django_filters.FilterSet):
     book_name = django_filters.CharFilter(lookup_expr='icontains', label='Book Name:')
     book_name__istartswith = django_filters.CharFilter(field_name='book_name', lookup_expr='istartswith',
-                                                       label='Book Name (Start with):')
+                                                       label='Book Name (Starts with):')
 
     category__category_name = django_filters.CharFilter(lookup_expr='icontains', label='Category:')
 
