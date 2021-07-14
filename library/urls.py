@@ -3,7 +3,10 @@ from django.urls import path
 from .views import (
     AuthorsAPIView, AuthorAPIView,
     LanguagesAPIView, LanguageAPIView,
+    CategoriesAPIView, CategoryAPIView,
+    PublishersAPIView, PublisherAPIView,
     BooksAPIView, BookAPIView,
+    RatingsAPIView, RatingAPIView,
 )
 
 
@@ -14,4 +17,10 @@ urlpatterns = [
     path('authors/<int:pk>/', AuthorAPIView.as_view(), name='author_api'),
     path('languages/', LanguagesAPIView.as_view(), name='languages_api'),
     path('languages/<int:pk>/', LanguageAPIView.as_view(), name='language_api'),
+    path('categories/', CategoriesAPIView.as_view(), name='categories_api'),
+    path('categories/<int:pk>/', CategoryAPIView.as_view(), name='category_api'),
+    path('publishers/', PublishersAPIView.as_view(), name='publishers_api'),
+    path('publishers/<int:pk>/', PublisherAPIView.as_view(), name='publisher_api'),
+    path('ratings/', RatingsAPIView.as_view(), name='ratings_api'),
+    path('ratings/<int:pk>/', RatingAPIView.as_view(), name='rating_api')
 ]
