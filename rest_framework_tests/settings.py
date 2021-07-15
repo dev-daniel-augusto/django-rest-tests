@@ -40,14 +40,12 @@ INSTALLED_APPS = [
     'crud',
     'school',
     'library',
-    'phone_field',
-    
+
     'bootstrap4',
+    'phone_field',
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
-
-
 ]
 
 MIDDLEWARE = [
@@ -142,6 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 # Django Rest Framework Settings
 
 REST_FRAMEWORK = {
@@ -160,6 +159,7 @@ REST_FRAMEWORK = {
         'burst': '37/second',
         'sustained': '75/minute',
         'average': '150/hour',
-        'slow': '300/day'
+        'slow': '300/day',
+        'anon': '150/day',
     }
 }
