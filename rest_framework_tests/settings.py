@@ -145,7 +145,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'library.permissions.IsSuperUser',
+        'library.permissions.IsSuperUserOrReadOnly',
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_THROTTLE_CLASSES': (
@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
         'burst': '37/second',
         'sustained': '75/minute',
         'average': '150/hour',
-        'slow': '300/day',
         'anon': '150/day',
+        'slow': '300/day',
     }
 }
