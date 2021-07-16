@@ -22,7 +22,7 @@ urlpatterns = [
 
     path('languages/', LanguagesAPIView.as_view(), name='languages_api'),
     path('languages/<int:pk>/', LanguageAPIView.as_view(), name='language_api'),
-    path('languages/<int:language_pk>/books', BooksAPIView.as_view(), name='language_books_api'),
+    path('languages/<int:language_pk>/books/', BooksAPIView.as_view(), name='language_books_api'),
 
     path('categories/', CategoriesAPIView.as_view(), name='categories_api'),
     path('categories/<int:pk>/', CategoryAPIView.as_view(), name='category_api'),
