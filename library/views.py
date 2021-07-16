@@ -46,6 +46,11 @@ class BooksAPIView(generics.ListCreateAPIView):
     ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
+    def get_queryset(self):
+        if self.kwargs.get('language_pk'):
+            return self.queryset.filter(language=self.kwargs.get('language_pk'))
+        return self.queryset.all()
+
 
 class BookAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
@@ -62,6 +67,11 @@ class AuthorsAPIView(generics.ListCreateAPIView):
     ordering = ['id']
     ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
+
+    def get_queryset(self):
+        if self.kwargs.get('book_pk'):
+            return self.queryset.filter(authors=self.kwargs.get('book_pk'))
+        return self.queryset.all()
 
 
 class AuthorAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -97,6 +107,11 @@ class CategoriesAPIView(generics.ListCreateAPIView):
     ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
+    def get_queryset(self):
+        if self.kwargs.get('book_pk'):
+            return self.queryset.filter(categories=self.kwargs.get('book_pk'))
+        return self.queryset.all()
+
 
 class CategoryAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
@@ -130,6 +145,11 @@ class RatingsAPIView(generics.ListCreateAPIView):
     ordering = ['id']
     ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
+
+    def get_queryset(self):
+        if self.kwargs.get('book_pk'):
+            return self.queryset.filter(title=self.kwargs.get('book_pk'))
+        return self.queryset.all()
 
 
 class RatingAPIView(generics.RetrieveUpdateDestroyAPIView):
