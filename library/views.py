@@ -1,4 +1,7 @@
 from rest_framework import generics
+from rest_framework import filters
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import (
     Author,
@@ -33,7 +36,14 @@ from .serializers import (
 class BooksAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filterset_class = BookFilter
+    filter_class = BookFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['author__author_name', 'category__category_name', '=number_of_pages',
+                     '=isbn_10', '=isbn_13', 'book_name', 'book_description',
+                     'language__language_name', 'publisher__publisher_name',
+                     'condition']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
@@ -47,6 +57,10 @@ class AuthorsAPIView(generics.ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     filterset_class = AuthorFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['author_name']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
@@ -60,6 +74,10 @@ class LanguagesAPIView(generics.ListCreateAPIView):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
     filterset_class = LanguageFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['language_name']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
@@ -73,6 +91,10 @@ class CategoriesAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     filterset_class = CategoryFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['category_name']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
@@ -86,6 +108,10 @@ class PublishersAPIView(generics.ListCreateAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
     filterset_class = PublisherFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['publisher_name']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
@@ -99,6 +125,10 @@ class RatingsAPIView(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     filterset_class = RatingFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['email', 'customer_name', 'review', 'stars', 'title__book_name']
+    ordering = ['id']
+    ordering_fields = '__all__'
     throttle_classes = [SustainedRateThrottle]
 
 
