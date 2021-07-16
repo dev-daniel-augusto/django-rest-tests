@@ -11,7 +11,7 @@ class Core(models.Model):
 
 
 class Author(Core):
-    author_name = models.CharField(max_length=250, unique=True)
+    author_name = models.CharField(max_length=250 , unique=True)
 
     class Meta:
         verbose_name = 'Author'
@@ -59,16 +59,16 @@ class Book(Core):
         ('Brand New', 'Brand New'),
         ('Old', 'Old'),
     )
-    author = models.ManyToManyField(Author)
-    category = models.ManyToManyField(Category)
-    number_of_pages = models.PositiveIntegerField()
+    author = models.ManyToManyField(Author, related_name='authors')
     isbn_10 = models.PositiveBigIntegerField(unique=True)
     isbn_13 = models.PositiveBigIntegerField(unique=True)
-    book_name = models.CharField(max_length=250, unique=True)
-    book_description = models.TextField(blank=True, default='')
+    category = models.ManyToManyField(Category, related_name='categories')
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     condition = models.CharField(max_length=9, choices=CONDITION_CHOICES)
+    book_name = models.CharField(max_length=250, unique=True)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    number_of_pages = models.PositiveIntegerField()
+    book_description = models.TextField(blank=True, default='')
 
     class Meta:
         verbose_name = 'Book'
@@ -87,11 +87,11 @@ class Rating(Core):
         BAD = 2
         HORRIBLE = 1
 
-    email = models.EmailField(max_length=250)
-    customer_name = models.CharField(max_length=300)
-    review = models.TextField(blank=True, default='')
     stars = models.IntegerField('Stars', choices=Star.choices)
     title = models.ForeignKey(Book, related_name='ratings', on_delete=models.CASCADE)
+    email = models.EmailField(max_length=250)
+    review = models.TextField(blank=True, default='')
+    customer_name = models.CharField(max_length=300)
 
     class Meta:
         verbose_name = 'Rating'
