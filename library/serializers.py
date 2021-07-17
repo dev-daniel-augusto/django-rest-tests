@@ -59,6 +59,28 @@ class BookSerializer(serializers.ModelSerializer):
                   'book_description',
                   )
 
+    def create(self, validated_data):
+        book = Book.objects.create(
+            isbn_10=validated_data['isbn_10'],
+            isbn_13=validated_data['isbn_13'],
+            language=validated_data['language'],
+            book_name=validated_data['book_name'],
+            condition=validated_data['condition'],
+            publisher=validated_data['publisher'],
+            number_of_pages=validated_data['number_of_pages'],
+        )
+        book.author.set(validated_data['author'])
+        book.category.set(validated_data['category'])
+        return book
+
+    def validate_isbn_13(self, isbn_13):
+        isbn_13 = str(isbn_13)
+        if len(isbn_13) > 13 or len(isbn_13) < 13:
+            raise serializers.ValidationError('Ensure this ISBN-13 digits are equal to 13')
+        elif ''.join([isbn_13[0], isbn_13[1], isbn_13[2]]) == str(978):
+            return int(isbn_13)
+        raise serializers.ValidationError('The first three digits of ISBN-13 must be 978')
+
 
 class RatingSerializer(serializers.ModelSerializer):
     title = serializers.SlugRelatedField(queryset=Book.objects.all(), slug_field='book_name')
