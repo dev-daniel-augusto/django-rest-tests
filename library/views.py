@@ -1,5 +1,6 @@
-from rest_framework import generics
 from rest_framework import filters
+from rest_framework import generics
+from django.shortcuts import get_object_or_404
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -154,5 +155,5 @@ class RatingsAPIView(generics.ListCreateAPIView):
 
 class RatingAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rating.objects.all()
-    serializer_class = PublisherSerializer
+    serializer_class = RatingSerializer
     throttle_classes = [AverageRateThrottle]
