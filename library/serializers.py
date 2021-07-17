@@ -39,10 +39,10 @@ class PublisherSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(many=True, read_only=True)
-    category = serializers.StringRelatedField(many=True, read_only=True)
-    language = serializers.StringRelatedField(read_only=True)
-    publisher = serializers.StringRelatedField(read_only=True)
+    author = serializers.SlugRelatedField(many=True, queryset=Author.objects.all(), slug_field='author_name')
+    category = serializers.SlugRelatedField(many=True, queryset=Category.objects.all(), slug_field='category_name')
+    language = serializers.SlugRelatedField(queryset=Language.objects.all(), slug_field='language_name')
+    publisher = serializers.SlugRelatedField(queryset=Publisher.objects.all(), slug_field='publisher_name')
 
     class Meta:
         model = Book
@@ -61,7 +61,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    title = serializers.StringRelatedField(read_only=True)
+    title = serializers.SlugRelatedField(queryset=Book.objects.all(), slug_field='book_name')
 
     class Meta:
         model = Rating
