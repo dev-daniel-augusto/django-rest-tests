@@ -61,6 +61,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
+    title = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Rating
@@ -69,9 +70,9 @@ class RatingSerializer(serializers.ModelSerializer):
         }
         fields = (
             'id',
-            'title',
-            'customer',
-            'review',
             'stars',
+            'title',
             'email',
+            'review',
+            'customer_name',
         )
