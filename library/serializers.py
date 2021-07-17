@@ -75,9 +75,9 @@ class BookSerializer(serializers.ModelSerializer):
 
     def validate_isbn_13(self, isbn_13):
         isbn_13 = str(isbn_13)
-        if len(isbn_13) > 13 or len(isbn_13) < 13:
+        if len(isbn_13) != 13:
             raise serializers.ValidationError('Ensure this ISBN-13 digits are equal to 13')
-        elif ''.join([isbn_13[0], isbn_13[1], isbn_13[2]]) == str(978):
+        elif ''.join([isbn_13[0], isbn_13[1], isbn_13[2]]) == '978':
             return int(isbn_13)
         raise serializers.ValidationError('The first three digits of ISBN-13 must be 978')
 
