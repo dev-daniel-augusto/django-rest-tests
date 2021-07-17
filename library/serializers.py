@@ -14,47 +14,53 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('author_name', 'created', 'modified')
+        fields = ('id', 'author_name')
 
 
 class LanguageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Language
-        fields = ('language_name', 'created', 'modified')
+        fields = ('id', 'language_name')
 
 
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('category_name', 'created', 'modified')
+        fields = ('id', 'category_name')
 
 
 class PublisherSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Publisher
-        fields = ('publisher_name', 'created', 'modified')
+        fields = ('id', 'publisher_name')
 
 
 class BookSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(many=True, read_only=True)
+    category = serializers.StringRelatedField(many=True, read_only=True)
+    language = serializers.StringRelatedField(read_only=True)
+    publisher = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Book
-        fields = (
-            'book_name',
-            'author',
-            'category',
-            'number_of_pages',
-            'language',
-            'publisher',
-            'condition',
-            'book_description',
-        )
+        fields = ('id',
+                  'author',
+                  'isbn_10',
+                  'isbn_13',
+                  'category',
+                  'language',
+                  'book_name',
+                  'condition',
+                  'publisher',
+                  'number_of_pages',
+                  'book_description',
+                  )
 
 
-class RatingSerializer:
+class RatingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rating
@@ -62,6 +68,7 @@ class RatingSerializer:
             'email': {'write_only': True}
         }
         fields = (
+            'id',
             'title',
             'customer',
             'review',
