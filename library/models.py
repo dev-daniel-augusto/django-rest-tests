@@ -63,10 +63,10 @@ class Book(Core):
     isbn_10 = models.PositiveBigIntegerField(unique=True)
     isbn_13 = models.PositiveBigIntegerField(unique=True)
     category = models.ManyToManyField(Category, related_name='categories')
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, related_name='languages', on_delete=models.CASCADE)
     condition = models.CharField(max_length=9, choices=CONDITION_CHOICES)
     book_name = models.CharField(max_length=250, unique=True)
-    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, related_name='publishers', on_delete=models.CASCADE)
     number_of_pages = models.PositiveIntegerField()
     book_description = models.TextField(blank=True, default='')
 
