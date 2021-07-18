@@ -34,31 +34,6 @@ from .serializers import (
 )
 
 
-class BooksAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    filter_class = BookFilter
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
-    search_fields = ['author__author_name', 'category__category_name', '=number_of_pages',
-                     '=isbn_10', '=isbn_13', 'book_name', 'book_description',
-                     'language__language_name', 'publisher__publisher_name',
-                     'condition']
-    ordering = ['id']
-    ordering_fields = '__all__'
-    throttle_classes = [SustainedRateThrottle]
-
-    def get_queryset(self):
-        if self.kwargs.get('language_pk'):
-            return self.queryset.filter(language=self.kwargs.get('language_pk'))
-        return self.queryset.all()
-
-
-class BookAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-    throttle_classes = [AverageRateThrottle]
-
-
 class AuthorsAPIView(generics.ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
@@ -79,6 +54,12 @@ class AuthorAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     throttle_classes = [AverageRateThrottle]
+
+    def get_object(self):
+        if self.kwargs.get('book_pk'):
+            return get_object_or_404(self.get_queryset(), authors=self.kwargs.get('book_pk'),
+                                     pk=self.kwargs.get('author_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
 
 
 class LanguagesAPIView(generics.ListCreateAPIView):
@@ -119,6 +100,12 @@ class CategoryAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
     throttle_classes = [AverageRateThrottle]
 
+    def get_object(self):
+        if self.kwargs.get('book_pk'):
+            return get_object_or_404(self.get_queryset(), categories=self.kwargs.get('book_pk'),
+                                     pk=self.kwargs.get('category_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
+
 
 class PublishersAPIView(generics.ListCreateAPIView):
     queryset = Publisher.objects.all()
@@ -135,6 +122,59 @@ class PublisherAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
     throttle_classes = [AverageRateThrottle]
+
+    def get_object(self):
+        if self.kwargs.get('book_pk'):
+            return get_object_or_404(self.get_queryset(), publishers=self.kwargs.get('book_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
+
+
+class BooksAPIView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    filter_class = BookFilter
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['author__author_name', 'category__category_name', '=number_of_pages',
+                     '=isbn_10', '=isbn_13', 'book_name', 'book_description',
+                     'language__language_name', 'publisher__publisher_name',
+                     'condition']
+    ordering = ['id']
+    ordering_fields = '__all__'
+    throttle_classes = [SustainedRateThrottle]
+
+    def get_queryset(self):
+        if self.kwargs.get('language_pk'):
+            return self.queryset.filter(language=self.kwargs.get('language_pk'))
+        elif self.kwargs.get('category_pk'):
+            return self.queryset.filter(category=self.kwargs.get('category_pk'))
+        elif self.kwargs.get('publisher_pk'):
+            return self.queryset.filter(publisher=self.kwargs.get('publisher_pk'))
+        elif self.kwargs.get('author_pk'):
+            return self.queryset.filter(author=self.kwargs.get('author_pk'))
+        return self.queryset.all()
+
+
+class BookAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    throttle_classes = [AverageRateThrottle]
+
+    def get_object(self):
+        if self.kwargs.get('language_pk'):
+            return get_object_or_404(self.get_queryset(), language__id=self.kwargs.get('language_pk'),
+                                     pk=self.kwargs.get('book_pk'))
+        elif self.kwargs.get('category_pk'):
+            return get_object_or_404(self.get_queryset(), category__id=self.kwargs.get('category_pk'),
+                                     pk=self.kwargs.get('book_pk'))
+        elif self.kwargs.get('publisher_pk'):
+            return get_object_or_404(self.get_queryset(), publisher__id=self.kwargs.get('publisher_pk'),
+                                     pk=self.kwargs.get('book_pk'))
+        elif self.kwargs.get('author_pk'):
+            return get_object_or_404(self.get_queryset(), author__id=self.kwargs.get('author_pk'),
+                                     pk=self.kwargs.get('book_pk'))
+        elif self.kwargs.get('rating_pk'):
+            return get_object_or_404(self.get_queryset(), ratings=self.kwargs.get('rating_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
 
 
 class RatingsAPIView(generics.ListCreateAPIView):
@@ -157,3 +197,9 @@ class RatingAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     throttle_classes = [AverageRateThrottle]
+
+    def get_object(self):
+        if self.kwargs.get('book_pk'):
+            return get_object_or_404(self.get_queryset(), title__id=self.kwargs.get('book_pk'),
+                                     pk=self.kwargs.get('rating_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
