@@ -78,6 +78,11 @@ class LanguageAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = LanguageSerializer
     throttle_classes = [AverageRateThrottle]
 
+    def get_object(self):
+        if self.kwargs.get('book_pk'):
+            return get_object_or_404(self.get_queryset(), language=self.kwargs.get('book_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('pk'))
+
 
 class CategoriesAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
